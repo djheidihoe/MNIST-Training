@@ -48,7 +48,7 @@ def main():
         print(f"Shape of y: {y.shape} {y.dtype}")
         break
 
-    model = DeepFeedForwardNetwrok(input_size=input_size).to(device)
+    model = DeepFeedForwardNetwork(input_size=input_size).to(device)
     print(model)
 
     loss_fn = CrossEntropyLoss()
