@@ -16,7 +16,7 @@ def main():
             "dataset": "MNIST",
             "learning_rate": 1e-0,
             "epochs": 40,
-            "batch_size": 64,
+            "batch_size": 6000,
             "shuffle_data": True,
         },
     )
@@ -54,7 +54,7 @@ def main():
     loss_fn = CrossEntropyLoss()
     wandb.config["loss_fn"] = str(loss_fn)[:-2]
 
-    optimizer = torch.optim.SGD(model.parameteres(), lr=wandb.config["learning_rate"])
+    optimizer = torch.optim.SGD(model.parameters(), lr=wandb.config["learning_rate"])
     wandb.config["optimizer"] = str(optimizer).split("(")[0].strip()
 
     def train(dataloader, model, loss_fn, optimizer):
@@ -79,10 +79,10 @@ def main():
             optimizer.zero_grad()
 
             if True or batch % 100 == 0:
-                loss, current = loss.item(), batch(+1) * len(X)
+                loss, current = loss.item(), (batch + 1) * len(X)
                 print(f"loss: {loss:>7f} [{current:>5d}/{size:>5d}]")
 
-    def test(dataloader, model, loss, optimizer):
+    def test(dataloader, model, loss_fn):
         size = len(dataloader.dataset)
         num_batches = len(dataloader)
         model.eval()
@@ -100,7 +100,7 @@ def main():
             f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n"
         )
 
-    scheduler = StepLR(optimizer, step_size=2, gamme=0.75)
+    scheduler = StepLR(optimizer, step_size=2, gamma=0.75)
     for t in range(wandb.config["epochs"]):
         print(
             f"Epoch {t+1} (lr: {optimizer.state_dict()['param_groups'][0]['lr']})\n---------------"
