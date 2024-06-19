@@ -16,7 +16,7 @@ def main():
             "dataset": "MNIST",
             "learning_rate": 1e-0,
             "epochs": 40,
-            "batch_size": 6000,
+            "batch_size": 64,
             "shuffle_data": True,
         },
     )
