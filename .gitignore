@@ -2,3 +2,4 @@ Pipfile
 Pipfile.lock
 wandb/
 data/
+mnist_data/
