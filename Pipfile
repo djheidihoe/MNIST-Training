@@ -12,7 +12,7 @@ name = "pytorch"
 torch = {version="*"}
 torchvision = {version="*"}
 torchaudio = {version="*"}
-numpy = {version="*"}
+numpy = {version="1.26"}
 wandb = {version="*"}
 
 [dev-packages]
